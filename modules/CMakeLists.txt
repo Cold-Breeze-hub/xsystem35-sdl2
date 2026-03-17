@@ -15,7 +15,6 @@ add_library(modules STATIC
   MsgSkip/MsgSkip.c
   NIGHTDLL/NIGHTDLL.c
   NIGHTDLL/nt_scenario.c
-  NIGHTDLL/sactcg.c
   NIGHTDLL/sactstring.c
   NIGHTDLL/sprite.c
   NIGHTDLL/sprite_draw.c
@@ -30,7 +29,6 @@ add_library(modules STATIC
   RandMT/RandMT.c
   S3xMusic/S3xMusic.c
   SACT/SACT.c
-  SACT/sactcg.c
   SACT/sactsound.c
   SACT/sacttimer.c
   SACT/sactstring.c
@@ -68,6 +66,7 @@ add_library(modules STATIC
   lib/drawtext.c
   lib/list.c
   lib/graph_blend_amap.c
+  lib/sactcg.c
   nDEMO/nDEMO.c
   nDEMOE/nDEMOE.c
   oDEMO/oDEMO.c

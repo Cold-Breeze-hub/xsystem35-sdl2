@@ -30,13 +30,10 @@
 #include "list.h"
 #include "ags.h"
 #include "sacttimer.h"
-#include "variable.h"
+#include "sactcg.h"
 
 // スプライトの最大数
 #define SPRITEMAX 21845
-
-// CGの最大数
-#define CGMAX 63336
 
 // メッセージの最大長さ
 #define MSGBUFMAX 257*10
@@ -58,24 +55,6 @@ typedef struct {
 	char *src; // 置き換え元文字列
 	char *dst; // 置き換え文字列
 } strexchange_t;
-
-// CG_XX で作るCGの種類
-enum cgtype {
-	CG_NOTUSED = 0,
-	CG_LINKED  = 1,
-	CG_SET     = 2,
-	CG_REVERSE = 3,
-	CG_STRETCH = 4
-};
-
-// cgに関する情報
-struct _cginfo {
-	enum cgtype type;  // CGの種類, 0: 未使用, 1:リンクされている, ...
-	int no;            // CGの番号
-	struct SDL_Surface *sf;
-	int refcnt;        // 参照カウンタ。０になったら開放してもよい。
-};
-typedef struct _cginfo cginfo_t;
 
 // スプライトのタイプ
 enum spritetype {
@@ -209,9 +188,7 @@ struct _sact {
 	SList *sp_quake;  // Quakeで揺らすスプライトのリスト
 	
 	SList *updatelist; // 再描画するスプライトのリスト
-	
-	cginfo_t *cg[CGMAX]; // cgまたはCG_xxで作った CG
-	
+
 	// 座標系の原点
 	SDL_Point origin;
 	

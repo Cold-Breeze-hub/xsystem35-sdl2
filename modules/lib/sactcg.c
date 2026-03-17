@@ -33,10 +33,13 @@
 #include "nact.h"
 #include "system.h"
 #include "ags.h"
-#include "sact.h"
+#include "variable.h"
 #include "sactcg.h"
 #include "cg.h"
 #include "gfx.h"
+
+#define CGMAX 65536
+static cginfo_t **cg_store;
 
 #define SPCG_ASSERT_NO(no) \
   if ((no) > (CGMAX -1)) { \
@@ -44,15 +47,21 @@
     return; \
   } \
 
-static cginfo_t *scg_new(enum cgtype type, int no, SDL_Surface *sf) {
+static void scg_ensure_store(void) {
+	if (!cg_store)
+		cg_store = calloc(CGMAX, sizeof(cginfo_t *));
+}
+
+static cginfo_t *scg_new(enum sactcg_type type, int no, SDL_Surface *sf) {
 	cginfo_t *info = calloc(1, sizeof(cginfo_t));
 	info->type = type;
 	info->no = no;
 	info->sf = sf;
 	info->refcnt = 1;
 
+	scg_ensure_store();
 	scg_free(no);
-	sact.cg[no] = info;
+	cg_store[no] = info;
 
 	return info;
 }
@@ -71,8 +80,8 @@ static cginfo_t *scg_get(int no) {
 		return NULL;
 	}
 	
-	if (sact.cg[no] != NULL)
-		return sact.cg[no];
+	if (cg_store && cg_store[no])
+		return cg_store[no];
 
 	SDL_Surface *sf = cg_load_as_sdlsurface(no - 1);
 	if (!sf) {
@@ -292,11 +301,13 @@ void scg_partcopy(int wNumDstCG, int wNumSrcCG, int wX, int wY, int wWidth, int 
 
 // 全てのCGの開放
 void scg_freeall(void) {
-	int i;
-	
-	for (i = 1; i < CGMAX; i++) {
+	if (!cg_store)
+		return;
+	for (int i = 1; i < CGMAX; i++) {
 		scg_free(i);
 	}
+	free(cg_store);
+	cg_store = NULL;
 }
 
 /**
@@ -306,28 +317,29 @@ void scg_freeall(void) {
 void scg_free(int no) {
 	SPCG_ASSERT_NO(no);
 	
-	cginfo_t *cg = sact.cg[no];
+	if (!cg_store) return;
+	cginfo_t *cg = cg_store[no];
 	if (!cg) return;
 	
 	scg_deref(cg);
-	sact.cg[no] = NULL;
+	cg_store[no] = NULL;
 }
 
 // CGの種類を取得
 int scg_querytype(int wNumCG) {
 	if (wNumCG >= (CGMAX -1)) return CG_NOTUSED;
-	if (sact.cg[wNumCG] == NULL) return CG_NOTUSED;
-	return sact.cg[wNumCG]->type;
+	if (!cg_store || !cg_store[wNumCG]) return CG_NOTUSED;
+	return cg_store[wNumCG]->type;
 }
 
 // CGの大きさを取得
 bool scg_querysize(int wNumCG, int *w, int *h) {
 	if (wNumCG >= (CGMAX -1)) goto errexit;
-	if (sact.cg[wNumCG] == NULL) goto errexit;
-	if (sact.cg[wNumCG]->sf == NULL) goto errexit;
+	if (!cg_store || !cg_store[wNumCG]) goto errexit;
+	if (cg_store[wNumCG]->sf == NULL) goto errexit;
 
-	*w = sact.cg[wNumCG]->sf->w;
-	*h = sact.cg[wNumCG]->sf->h;
+	*w = cg_store[wNumCG]->sf->w;
+	*h = cg_store[wNumCG]->sf->h;
 	
 	return true;
 
@@ -339,15 +351,15 @@ bool scg_querysize(int wNumCG, int *w, int *h) {
 // CGのBPPを取得
 int scg_querybpp(int wNumCG) {
 	if (wNumCG >= (CGMAX -1)) return 0;
-	if (sact.cg[wNumCG] == NULL) return 0;
-	if (sact.cg[wNumCG]->sf == NULL) return 0;
-	return sact.cg[wNumCG]->sf->format->BitsPerPixel;
+	if (!cg_store || !cg_store[wNumCG]) return 0;
+	if (cg_store[wNumCG]->sf == NULL) return 0;
+	return cg_store[wNumCG]->sf->format->BitsPerPixel;
 }
 
 // CGの alphamap が存在するかを取得
 bool scg_existalphamap(int wNumCG) {
 	if (wNumCG >= (CGMAX -1)) return false;
-	if (sact.cg[wNumCG] == NULL) return false;
-	if (sact.cg[wNumCG]->sf == NULL) return false;
-	return SDL_ISPIXELFORMAT_ALPHA(sact.cg[wNumCG]->sf->format->format);
+	if (!cg_store || !cg_store[wNumCG]) return false;
+	if (cg_store[wNumCG]->sf == NULL) return false;
+	return SDL_ISPIXELFORMAT_ALPHA(cg_store[wNumCG]->sf->format->format);
 }

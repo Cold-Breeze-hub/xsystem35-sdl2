@@ -31,6 +31,7 @@
 #include "system.h"
 #include "ags.h"
 #include "nact.h"
+#include "variable.h"
 #include "input.h"
 #include "sact.h"
 #include "sprite.h"

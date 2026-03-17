@@ -25,7 +25,21 @@
 #define __SACTCG_H__
 
 #include "portab.h"
-#include "sact.h"
+
+enum sactcg_type {
+	CG_NOTUSED = 0,
+	CG_LINKED  = 1,
+	CG_SET     = 2,
+	CG_REVERSE = 3,
+	CG_STRETCH = 4
+};
+
+typedef struct {
+	enum sactcg_type type;
+	int no;
+	struct SDL_Surface *sf;
+	int refcnt;
+} cginfo_t;
 
 cginfo_t *scg_addref(int no);
 void scg_deref(cginfo_t *cg);

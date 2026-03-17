@@ -82,7 +82,7 @@ void ntmsg_init() {
 	nt_sp_add_updatelist(sp);
 	
 	// 文字背景CG作成
-	nt_scg_create(CGNO_MSGFR_BG,
+	scg_create(CGNO_MSGFR_BG,
 		   main_surface->w, main_surface->h,
 		   0, 0, 0, 255);
 	// night.cg[CGNO_MSGFR_BG]->refcnt++;
@@ -92,9 +92,9 @@ void ntmsg_init() {
 	nt_sp_add_updatelist(sp);
 	
 	// キー入力アニメーションCG作成
-	nt_scg_cut(CGNO_MSGHAK_1, CGNO_MSGHAK_LCG, 0, 0, 9, 9);
+	scg_cut(CGNO_MSGHAK_1, CGNO_MSGHAK_LCG, 0, 0, 9, 9);
 	//night.cg[CGNO_MSGHAK_1]->refcnt++;
-	nt_scg_cut(CGNO_MSGHAK_2, CGNO_MSGHAK_LCG, 0, 9, 9, 9);
+	scg_cut(CGNO_MSGHAK_2, CGNO_MSGHAK_LCG, 0, 9, 9, 9);
 	//night.cg[CGNO_MSGHAK_2]->refcnt++;
 	sp = night.sp[SPNO_MSG_KEYANIM] = nt_sp_new(SPNO_MSG_KEYANIM, CGNO_MSGHAK_1, CGNO_MSGHAK_2, 0, SPRITE_ANIME);
 	sp->u.anime.interval = HAKANIM_INTERVAL;

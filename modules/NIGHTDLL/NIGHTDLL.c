@@ -46,7 +46,7 @@ static void NIGHTDLL_reset(void) {
 		if (night.sp[i])
 			nt_sp_free(night.sp[i]);
 	}
-	nt_scg_freeall();
+	scg_freeall();
 	memset(&night, 0, sizeof(night));
 }
 

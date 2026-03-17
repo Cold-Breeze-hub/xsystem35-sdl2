@@ -37,10 +37,6 @@ struct _night {
 	int waitskiplv;
 	int waitkey;
 
-	
-	// graph
-	// cginfo_t *cg[CGMAX];
-
 	SDL_Rect updaterect;
 
 	FontType fonttype;

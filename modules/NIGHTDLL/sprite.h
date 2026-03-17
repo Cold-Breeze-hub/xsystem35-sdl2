@@ -4,6 +4,7 @@
 
 #include "portab.h"
 #include <SDL_rect.h>
+#include "sactcg.h"
 
 #define DEFAULT_UPDATE nt_sp_draw
 
@@ -21,7 +22,6 @@
 #define SPNO_MSG_KEYANIM 12 // メッセージキー入力アニメーション
 #define SPNO_MSG_ICON_MUTE 13 // メッセージウィンドアイコン
 
-#define CGMAX 65536
 // 0-9999: reserve for Link CG
 // 2051: メッセージウィンド枠CG
 #define CGNO_MSGFRAME_LCG 2051
@@ -38,25 +38,6 @@
 #define CGNO_MSGHAK_2 10001
 // 10002: 文字下地CG
 #define CGNO_MSGFR_BG 10002
-
-
-// CG_XX で作るCGの種類
-enum cgtype {
-	CG_NOTUSED = 0,
-	CG_LINKED  = 1,
-	CG_SET     = 2,
-	CG_REVERSE = 3,
-	CG_STRETCH = 4
-};
-
-// cgに関する情報
-struct _cginfo {
-	enum cgtype type;  // CGの種類, 0: 未使用, 1:リンクされている, ...
-	int no;            // CGの番号
-	struct SDL_Surface *sf;
-	int refcnt;        // 参照カウンタ。０になったら開放してもよい。
-};
-typedef struct _cginfo cginfo_t;
 
 
 enum spritetype {
