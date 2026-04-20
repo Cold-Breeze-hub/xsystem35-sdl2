@@ -52,9 +52,16 @@ void commandIK() {
 	case 0:
 		
 		//当启用逐字显示时，如果中途跳过逐字显示，后续对话也将跳过
-		//因此在IK0处添加判断，将messagewait_cancel重置;
-		if(nact->messagewait_enable = true) {
-			nact->messagewait_cancel = false;
+		//因此在IK0处添加判断，将messagewait_cancelled重置;
+		if(nact->messagewait_enable == true) {
+			nact->messagewait_cancelled = false;
+		}
+
+		// 新增：检测并等待已按下的按键释放
+		//当按键在进入IK0之前就已经被按下，则等待按键释放
+		key = sys_getInputInfo();
+		if (key != 0) {
+			sys_key_releasewait(key, true);  // 等待按键释放
 		}
 
 		sysVar[0] = 0;
