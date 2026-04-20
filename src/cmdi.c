@@ -50,6 +50,13 @@ void commandIK() {
 	 */
 	switch(num) {
 	case 0:
+		
+		//当启用逐字显示时，如果中途跳过逐字显示，后续对话也将跳过
+		//因此在IK0处添加判断，将messagewait_cancel重置;
+		if(nact->messagewait_enable = true) {
+			nact->messagewait_cancel = false;
+		}
+
 		sysVar[0] = 0;
 		key = sys_getInputInfo();
 		if (ik_key != key) repeating = 0;

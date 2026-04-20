@@ -143,7 +143,8 @@ void msg_putMessage(const char *m) {
 			nact->callback();
 		}
 	} else {
-		ags_updateArea(drawn.x, drawn.y, drawn.w, drawn.h);//如果快进则直接显示全部对话，跳过逐字显示;
+		ags_updateArea(drawn.x, drawn.y, drawn.w, drawn.h);
+		//如果快进或点击取消逐字显示则直接显示全部对话，跳过逐字显示;
 	}
 }
 
