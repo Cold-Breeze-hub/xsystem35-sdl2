@@ -1,85 +1,84 @@
-Game Compatibility
-==================
+# 游戏兼容性
 
-|                 Game                        |   Status    | Notes |
-| ------------------------------------------- | ----------- | ----- |
-| 鬼畜王ランス                                | Supported   |       |
-| Kichikuou Rance (EN)                        | Supported   | Fan translation |
-| RanceIV －教団の遺産－                      | Supported   | Win95 edition and [Ver2.05](https://hannylaboratory.blogspot.com/2023/01/blog-post_26.html) |
-| Rance4 -Legacy of the Sect- (EN)            | Supported   | Fan translation |
-| 兰斯IV －教团的遗产－ (CN)                  | Supported   | Fan translation |
-| ランス4.1                                   | Supported   | [Ver1.05](https://hannylaboratory.blogspot.com/2023/02/blog-post_9.html). Use system3-sdl2 for older versions |
-| ランス4.2                                   | Supported   | [Ver1.05](https://hannylaboratory.blogspot.com/2023/02/blog-post_9.html). Use system3-sdl2 for older versions |
-| いけないかつみ先生                          | Supported   | Emojis are not supported |
-| 闘神都市II                                  | Supported   | Win95 edition |
-| かえるにょ・ぱにょ～ん                      | Supported   | Normal / Low-priced edition |
-| 戦巫女                                      | Supported   | Normal / Low-priced edition |
-| 零式                                        | Supported   | From ALICEの館４・５・６ / Low-priced edition |
-| アトラク＝ナクア                            | Supported   | From ALICEの館４・５・６ / Low-priced edition |
-| Rance －光を求めて－                        | Supported   | From ALICEの館４・５・６ |
-| Rance II －反逆の少女達－                   | Supported   | From ALICEの館４・５・６ |
-| Rance III －リーザス陥落－                  | Supported   | From ALICEの館４・５・６ |
-| DALK                                        | Supported   | From ALICEの館４・５・６ |
-| 闘神都市                                    | Supported   | From ALICEの館４・５・６ |
-| Dr.STOP                                     | Supported   | From ALICEの館４・５・６ |
-| 人間狩り                                    | Supported   | From ALICEの館４・５・６ / アリスCD |
-| 女の子図鑑                                  | Unknown     | From ALICEの館４・５・６ |
-| 恋のおわり                                  | Unknown     |       |
-| 王道勇者                                    | Supported   |       |
-| AmbivalenZ                                  | Supported   | Win95 edition |
-| DiaboLiQuE                                  | Supported   | Normal / Low-priced edition |
-| 夢幻泡影                                    | Unknown     | Win98 edition |
-| ぱすてるチャイム                            | Supported   | See [patch/README.TXT](patch/README.TXT) |
-| ぷろすちゅーでんとGood                      | Supported   |       |
-| 守り神様                                    | Supported   |       |
-| ママトト                                    | Supported   |       |
-| HUSHABY BABY                                | Supported   |       |
-| DARCROWS                                    | Supported   |       |
-| 隠れ月                                      | Supported   |       |
-| PERSIOM                                     | Supported   | 3D sound is not supported |
-| SeeIn青                                     | Supported   |       |
-| かえるにょ国にょアリス                      | Supported   | From 20世紀アリス |
-| これD・P・S？                               | Supported   | From 20世紀アリス |
-| 夜が来る！                                  | Unsupported |       |
-| Only you ～リ・クルス～                     | Supported   |       |
-| 大悪司                                      | Supported   |       |
-| 王子さまＬｖ１                              | Supported   |       |
-| 王子さま１ヵ月後                            | Supported   | From 王子さまLV1.5 |
-| 白鳳の子分叩き                              | Supported   | From 王子さまLV1.5 |
-| チェシャのお部屋1.5                         | Supported   | From 王子さまLV1.5 |
-| 王子さま１／１６                            | Supported   | From 王子さまLV1.5 |
-| スパイ伊藤の「クイズ！俺にさぼらせろ」      | Supported   | From 王子さまLV1.5 |
-| 妻みぐい                                    | Supported   | Opening demo is not supported |
-| 超昂天使エスカレイヤー                      | Supported   | Opening demo is not supported |
-| ランス５Ｄ                                  | Supported   |       |
-| Rance 5D - The Lonely Girl (EN)             | Supported   | MangaGamer version |
-| 俺の下であがけ                              | Supported   |       |
-| 楽園行                                      | Supported   |       |
-| 妻みぐい２                                  | Supported   |       |
-| シェル・クレイル                            | Supported   |       |
-| ナイトデーモン                              | Supported   |       |
-| Nor                                         | Unsupported |       |
-| 翡翠の眸                                    | Unsupported |       |
-| 学園KING                                    | Supported   | From アリスCD |
-| 学園KING 番外編                             | Supported   | From アリスCD |
-| 蒼海に墜ちて                                | Supported   | From アリスCD |
-| ぶろぶろ                                    | Supported   | From アリスCD |
-| 裸ぶろぶろ狂                                | Supported   | From アリスCD |
-| メイドのススメ                              | Supported   | From アリスCD |
-| 学園漂流戦記                                | Supported   | From アリスCD |
-| 学園漂流戦記２                              | Supported   | From アリスCD |
-| 当たって!!KUDAKERO 予告編                   | Supported   | From アリスCD |
-| 妖精                                        | Supported   | From アリスCD |
-| ［扉］                                      | Supported   | From アリスCD |
-| 叩き殺し太郎                                | Supported   | From アリスCD |
-| バルーンぽっぷ                              | Supported   | From アリスCD |
-| 高速ひよこ２                                | Supported   | From アリスCD |
-| おせろっと                                  | Supported   | From アリスCD |
-| マスカレイド                                | Supported   | From アリスCD |
-| キャロル ～聖なる鐘が響く夜～               | Supported   | From アリスCD, Online match is not supported |
-| できるかなー？                              | Supported   | From アリスCD |
-| Child Assassin                              | Unsupported | From アリスCD |
-| Klavier                                     | Supported   | From アリスCD |
-| 弱肉狂食                                    | Supported   | From アリスCD |
-| 眼鏡大戦２                                  | Supported   | From アリスCD |
-| 妄想くん                                    | Supported   | From アリスCD |
+| 游戏                                   | 状态   | 备注                                                         |
+| :------------------------------------- | :----- | :----------------------------------------------------------- |
+| 鬼畜王ランス                           | 支持   |                                                              |
+| Kichikuou Rance (EN)                   | 支持   | 粉丝翻译版                                                   |
+| RanceIV －教団の遺産－                 | 支持   | Win95版 及 [Ver2.05](https://hannylaboratory.blogspot.com/2023/01/blog-post_26.html) |
+| Rance4 -Legacy of the Sect- (EN)       | 支持   | 粉丝翻译版                                                   |
+| 兰斯IV －教团的遗产－ (CN)             | 支持   | 粉丝翻译版                                                   |
+| ランス4.1                              | 支持   | [Ver1.05](https://hannylaboratory.blogspot.com/2023/02/blog-post_9.html)。旧版本请使用 system3-sdl2 |
+| ランス4.2                              | 支持   | [Ver1.05](https://hannylaboratory.blogspot.com/2023/02/blog-post_9.html)。旧版本请使用 system3-sdl2 |
+| いけないかつみ先生                     | 支持   | 不支持表情符号                                               |
+| 闘神都市II                             | 支持   | Win95版                                                      |
+| かえるにょ・ぱにょ～ん                 | 支持   | 普通版 / 低价版                                              |
+| 戦巫女                                 | 支持   | 普通版 / 低价版                                              |
+| 零式                                   | 支持   | 来自《ALICE之馆４・５・６》 / 低价版                         |
+| アトラク＝ナクア                       | 支持   | 来自《ALICE之馆４・５・６》 / 低价版                         |
+| Rance －光を求めて－                   | 支持   | 来自《ALICE之馆４・５・６》                                  |
+| Rance II －反逆の少女達－              | 支持   | 来自《ALICE之馆４・５・６》                                  |
+| Rance III －リーザス陥落－             | 支持   | 来自《ALICE之馆４・５・６》                                  |
+| DALK                                   | 支持   | 来自《ALICE之馆４・５・６》                                  |
+| 闘神都市                               | 支持   | 来自《ALICE之馆４・５・６》                                  |
+| Dr.STOP                                | 支持   | 来自《ALICE之馆４・５・６》                                  |
+| 人間狩り                               | 支持   | 来自《ALICE之馆４・５・６》 / 爱丽丝CD                       |
+| 女の子図鑑                             | 未知   | 来自《ALICE之馆４・５・６》                                  |
+| 恋のおわり                             | 未知   |                                                              |
+| 王道勇者                               | 支持   |                                                              |
+| AmbivalenZ                             | 支持   | Win95版                                                      |
+| DiaboLiQuE                             | 支持   | 普通版 / 低价版                                              |
+| 夢幻泡影                               | 未知   | Win98版                                                      |
+| ぱすてるチャイム                       | 支持   | 参见 [patch/README.TXT](https://patch/README.TXT)            |
+| ぷろすちゅーでんとGood                 | 支持   |                                                              |
+| 守り神様                               | 支持   |                                                              |
+| ママトト                               | 支持   |                                                              |
+| HUSHABY BABY                           | 支持   |                                                              |
+| DARCROWS                               | 支持   |                                                              |
+| 隠れ月                                 | 支持   |                                                              |
+| PERSIOM                                | 支持   | 不支持3D音效                                                 |
+| SeeIn青                                | 支持   |                                                              |
+| かえるにょ国にょアリス                 | 支持   | 来自《20世纪爱丽丝》                                         |
+| これD・P・S？                          | 支持   | 来自《20世纪爱丽丝》                                         |
+| 夜が来る！                             | 不支持 |                                                              |
+| Only you ～リ・クルス～                | 支持   |                                                              |
+| 大悪司                                 | 支持   |                                                              |
+| 王子さまＬｖ１                         | 支持   |                                                              |
+| 王子さま１ヵ月後                       | 支持   | 来自《王子大人LV1.5》                                        |
+| 白鳳の子分叩き                         | 支持   | 来自《王子大人LV1.5》                                        |
+| チェシャのお部屋1.5                    | 支持   | 来自《王子大人LV1.5》                                        |
+| 王子さま１／１６                       | 支持   | 来自《王子大人LV1.5》                                        |
+| スパイ伊藤の「クイズ！俺にさぼらせろ」 | 支持   | 来自《王子大人LV1.5》                                        |
+| 妻みぐい                               | 支持   | 不支持开场演示                                               |
+| 超昂天使エスカレイヤー                 | 支持   | 不支持开场演示                                               |
+| ランス５Ｄ                             | 支持   |                                                              |
+| Rance 5D - The Lonely Girl (EN)        | 支持   | MangaGamer版                                                 |
+| 俺の下であがけ                         | 支持   |                                                              |
+| 楽園行                                 | 支持   |                                                              |
+| 妻みぐい２                             | 支持   |                                                              |
+| シェル・クレイル                       | 支持   |                                                              |
+| ナイトデーモン                         | 支持   |                                                              |
+| Nor                                    | 不支持 |                                                              |
+| 翡翠の眸                               | 不支持 |                                                              |
+| 学園KING                               | 支持   | 来自爱丽丝CD                                                 |
+| 学園KING 番外編                        | 支持   | 来自爱丽丝CD                                                 |
+| 蒼海に墜ちて                           | 支持   | 来自爱丽丝CD                                                 |
+| ぶろぶろ                               | 支持   | 来自爱丽丝CD                                                 |
+| 裸ぶろぶろ狂                           | 支持   | 来自爱丽丝CD                                                 |
+| メイドのススメ                         | 支持   | 来自爱丽丝CD                                                 |
+| 学園漂流戦記                           | 支持   | 来自爱丽丝CD                                                 |
+| 学園漂流戦記２                         | 支持   | 来自爱丽丝CD                                                 |
+| 当たって!!KUDAKERO 予告編              | 支持   | 来自爱丽丝CD                                                 |
+| 妖精                                   | 支持   | 来自爱丽丝CD                                                 |
+| ［扉］                                 | 支持   | 来自爱丽丝CD                                                 |
+| 叩き殺し太郎                           | 支持   | 来自爱丽丝CD                                                 |
+| バルーンぽっぷ                         | 支持   | 来自爱丽丝CD                                                 |
+| 高速ひよこ２                           | 支持   | 来自爱丽丝CD                                                 |
+| おせろっと                             | 支持   | 来自爱丽丝CD                                                 |
+| マスカレイド                           | 支持   | 来自爱丽丝CD                                                 |
+| キャロル ～聖なる鐘が響く夜～          | 支持   | 来自爱丽丝CD，不支持在线对战                                 |
+| できるかなー？                         | 支持   | 来自爱丽丝CD                                                 |
+| Child Assassin                         | 不支持 | 来自爱丽丝CD                                                 |
+| Klavier                                | 支持   | 来自爱丽丝CD                                                 |
+| 弱肉狂食                               | 支持   | 来自爱丽丝CD                                                 |
+| 眼鏡大戦２                             | 支持   | 来自爱丽丝CD                                                 |
+| 妄想くん                               | 支持   | 来自爱丽丝CD                                                 |

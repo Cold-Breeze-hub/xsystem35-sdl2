@@ -1,120 +1,113 @@
 #----------------------------------------------------------
-# XSyetem35 Configuration File
+# XSystem35 配置文件
 #
-# XSystem35 reads configuration from ~/.xsys35rc and .xsys35rc in the current
-# directory. The latter takes precedence over the former, so you should put
-# general settings in ~/.xsys35rc and game-specific settings in .xsys35rc
-# in the game directory.
+# XSystem35 会从 ~/.xsys35rc 和当前目录下的 .xsys35rc 读取配置。
+# 当前目录下的配置文件优先级更高，因此建议将通用设置放在 ~/.xsys35rc，
+# 游戏特定设置放在游戏目录中的 .xsys35rc 内。
 #
-# Lines starting with '#' are comments.
+# 以 '#' 开头的行为注释。
 
 # ------------------------------------------------------------
-# Fonts
+# 字体
 #
 
-# Gothic (sans-serif) and Mincho (serif) fonts. .ttf and .otf files are
-# supported.
+# Gothic（无衬线）和 Mincho（衬线）字体。支持 .ttf 和 .otf 文件。
 
 #ttfont_gothic: /usr/local/share/xsystem35/fonts/MTLc3m.ttf
 #ttfont_mincho: /usr/local/share/xsystem35/fonts/mincho.otf
 
-# Some fonts have multiple "faces" included. This specifies which face to use
-# from the font file.
+# 某些字体文件包含多个“字面”。此项指定使用字体文件中的哪个字面。
 
 #ttfont_mincho_face: 0
 #ttfont_gothic_face: 0
 
-# Disable font antialiasing.
+# 禁用字体抗锯齿。
 
 #antialias: No
 
 # ------------------------------------------------------------
-# Display
+# 显示
 #
 
-# Enforce integer scaling.
+# 强制整数缩放。
 
 #integerscale: Yes
 
-# Disable custom mouse cursor defined in resource files.
+# 禁用资源文件中定义的自定义鼠标光标。
 
 #no_imagecursor: Yes
 
 # ------------------------------------------------------------
-# Audio
+# 音频
 #
 
-# Path to the CD playlist. The playlist is a text file with one filename per
-# line, in the order of CD tracks.
+# CD 播放列表的路径。播放列表是一个文本文件，每行一个文件名，顺序与 CD 音轨一致。
 
 #playlist: playlist.txt
 
-# Audio buffer size in bytes.
-# Too small value causes sound glitches, too large value causes sound delay.
+# 音频缓冲区大小（字节）。
+# 值太小会导致声音卡顿，值太大会导致声音延迟。
 
 #audio_buffer_size: 2048
 
-# MIDI Output method
-# 'e'  : SDL_mixer (default)
-# 'pX' : via PortMidi (X is the device number, usually 0)
-# '0'  : disable MIDI
+# MIDI 输出方式
+# 'e'  : SDL_mixer（默认）
+# 'pX' : 通过 PortMidi（X 为设备号，通常为 0）
+# '0'  : 禁用 MIDI
 
 #midi_output_device: e
 
 # ------------------------------------------------------------
-# Input
+# 输入
 #
 
-# joystick device number (0-)
+# 手柄设备编号（从 0 开始）
 
 #joy_device: 0
 
 # -----------------------------------------------------------
-# Miscellaneous
+# 杂项
 #
 
-# Directory to save game state files.
-# If it begins with '~', it is expanded to the user's home directory ($HOME).
+# 保存游戏状态文件的目录。
+# 若以 '~' 开头，则会展开为用户的主目录（$HOME）。
 
 #savedir: ~/.xsystem35-saves
 
-# The format when writing save files.
-#  xsystem35 : default
-#  system36  : compatible with System3.5 v2 - System3.6
-#  system39  : compatible with System3.8 - System3.9
+# 写入存档文件时使用的格式。
+#  xsystem35 : 默认
+#  system36  : 兼容 System3.5 v2 - System3.6
+#  system39  : 兼容 System3.8 - System3.9
 
 #saveformat: xsystem35
 
-# Enables game-specific hacks. Usually auto-detected, but must be
-# specified for games with modified / translated titles.
+# 启用针对特定游戏的修复补丁。通常会自动检测，但对于标题被修改/翻译的游戏需要手动指定。
 #
-# Possible values are: toushin2, rance3_eng, rance4_eng, rance4_v2, persiom, agake.
+# 可选值包括：toushin2, rance3_eng, rance4_eng, rance4_v2, persiom, agake。
 
 #game: rance4_v2
 
-# Text hook mode.
-#  none  : no text hook (default)
-#  print : print text to console
-#  copy  : automatically copy text to clipboard (for use with text hooker tools)
+# 文本钩子模式。
+#  none  : 不进行文本钩子（默认）
+#  print : 将文本打印到控制台
+#  copy  : 自动将文本复制到剪贴板（用于配合文本提取工具）
 
 #texthook: none
 
-# Suppress text hook on specified scenario pages.
-# Used to suppress system messages, etc.
-# The example below is for Kichikuou Rance.
+# 在指定的场景页面上抑制文本钩子。
+# 用于抑制系统消息等。
+# 以下示例适用于《鬼畜王兰斯》。
 
 #texthook_suppress: 7,11,15,16,17,18,23,24,32,33,197
 
-# Censor list for Streamer Mode.
-# This mosaics images listed in the specified file, making them safe for
-# streaming or public viewing. The file should contain one image number
-# per line, with '#' treated as comments.
+# 直播模式的审查列表。
+# 对指定文件中列出的图像进行马赛克处理，使其适合直播或公开观看。
+# 文件应每行一个图像编号，'#' 视为注释。
 
 #censor: censor_list.txt
 
-# Enables the ZB command (change the font weight). It is disabled by default
-# because it makes the text too bold with our default fonts.
-# This option is experimental and may be removed in the future. See
-# https://github.com/kichikuou/xsystem35-sdl2/issues/44 for details.
+# 启用 ZB 命令（更改字体粗细）。默认禁用，因为使用默认字体会使文本过粗。
+# 此选项为实验性，未来可能移除。详见：
+# https://github.com/kichikuou/xsystem35-sdl2/issues/44
 
 #enable_zb: Yes

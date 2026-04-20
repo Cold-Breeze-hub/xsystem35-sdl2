@@ -1,5 +1,3 @@
-The test scenario file (`testSA.ALD`) in this directory should pass in both
-xsystem35 and the original System 3.x.
+本目录中的测试场景文件（testSA.ALD）应能在 xsystem35 和原始 System 3.x 中正常运行。
 
-To build `testSA.ALD`, install [xsys35c](https://github.com/kichikuou/xsys35c)
-and run `xsys35c` command in this directory.
+要构建 testSA.ALD，请安装 xsys35c，然后在此目录中运行 xsys35c 命令。
