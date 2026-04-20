@@ -139,21 +139,26 @@ void msg_putMessage(const char *m) {
 				ags_updateArea(drawn.x, drawn.y, drawn.w, drawn.h);
 				break;
 			}
-			sys_sleep(nact->messagewait_time * 10);
+			sys_sleep(nact->messagewait_time * 10);//此处可对逐字显示延迟进行进一步的调整
 			nact->callback();
 		}
 	} else {
-		ags_updateArea(drawn.x, drawn.y, drawn.w, drawn.h);
+		ags_updateArea(drawn.x, drawn.y, drawn.w, drawn.h);//如果快进则直接显示全部对话，跳过逐字显示;
 	}
 }
 
+
+//进行换行操作，R命令
 void msg_nextLine() {
 	texthook_newline();
 
 	// puts("next Line");
 	if (msg.mg_getString) {
+
+		//此处如果设置了MG0, 1开启显示字符串获取，则不会换行
+		//因此此处将return进行注释;
 		msgget_at_r();
-		return;
+		//return;
 	}
 	
 	msgcur.x  = msg.win->x;

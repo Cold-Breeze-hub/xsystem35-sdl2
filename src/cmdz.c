@@ -121,20 +121,27 @@ void commandZH() {
 	TRACE("ZH %d:",sw);
 }
 
+
+//ZW命令，开启后启用文字的逐字显示
 void commandZW() {
 	/* CAPS 状態の内部的制御を変更する。 */
 	int sw = getCaliValue();
 	
 	if (sw < 256) {
-		// System 3.5 has a bug in which ZW 1 does not disable message waiting,
-		// and Rance 2 depends on it.
+		// 系统3.5有一个错误，其中zw1不禁用消息等待，
+		// 兰斯2就靠它了。
 		if (game_id == GAME_RANCE2)
 			sw = 2;
 		nact->messagewait_enable = ((sw & 0xff) > 1);
 		nact->messagewait_cancelled = false;
 	} else {
-		nact->messagewait_time = sw & 0xff;
-		nact->messagewait_cancel = !!(sw & 0x200);
+
+		//在开启自定义逐字时间的延迟时间后，并没有将messagewait_enable的状态改变
+		//导致无法启用逐字显示，此处进行添加:
+		nact->messagewait_enable = true;
+
+		nact->messagewait_time = sw & 0xff;//配置延迟时间，messagewait_time * 1 / 60;
+		nact->messagewait_cancel = !!(sw & 0x200);//messagewait_cancel是逐字显示的标志位，开启则允许点击跳过逐字显示;
 	}
 	
 	TRACE("ZW %d:", sw);
