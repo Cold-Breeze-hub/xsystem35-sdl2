@@ -378,6 +378,13 @@ void event_handle_event(SDL_Event *e) {
 		break;
 	case SDL_KEYDOWN:
 		keyEventProsess(&e->key, true);
+
+		//如果按下Ctrl则加速
+		if (e->key.keysym.sym == SDLK_LCTRL || e->key.keysym.sym == SDLK_RCTRL) {
+			msgskip_activate(true);
+		}
+
+
 		break;
 	case SDL_KEYUP:
 		keyEventProsess(&e->key, false);
@@ -388,7 +395,20 @@ void event_handle_event(SDL_Event *e) {
 		case SDLK_F4:
 			gfx_setFullscreen(!gfx_fullscreen);
 			break;
+
+		//更改快捷键，ESC退出游戏
+		case SDLK_ESCAPE:
+			menu_quitmenu_open();
+			break;
+
+		//按下Ctrl加速
+		case SDLK_LCTRL:
+		case SDLK_RCTRL:
+			msgskip_activate(false);
+			break;
 		}
+
+
 #ifdef __ANDROID__
 		if (e->key.keysym.scancode == SDL_SCANCODE_AC_BACK) {
 			menu_quitmenu_open();
@@ -583,7 +603,6 @@ int event_get_key(void) {
 	      ((RawKeyInfo[KEY_RIGHT] || RawKeyInfo[KEY_PAD_6]) << 3) |
 	      (RawKeyInfo[KEY_RETURN] << 4) |
 	      (RawKeyInfo[KEY_SPACE ] << 5) |
-	      (RawKeyInfo[KEY_ESCAPE] << 6) |
 	      (RawKeyInfo[KEY_TAB]    << 7));
 	
 	return rt;

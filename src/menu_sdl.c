@@ -39,14 +39,14 @@ void menu_open(void) {
 
 void menu_quitmenu_open(void) {
 	const SDL_MessageBoxButtonData buttons[] = {
-		{ SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 1, "Quit" },
-		{ SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 0, "Cancel" },
+		{ SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 0, "取消" },
+		{ SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 1, "退出" },
 	};
 	const SDL_MessageBoxData messagebox_data = {
 		.flags = SDL_MESSAGEBOX_INFORMATION,
 		.window = gfx_window,
-		.title = "Confirm",
-		.message = "Quit xsystem35?",
+		.title = "确认",
+		.message = "确定退出 xsystem35 吗？",
 		.numbuttons = SDL_arraysize(buttons),
 		.buttons = buttons,
 	};
@@ -62,14 +62,14 @@ void menu_quitmenu_open(void) {
 
 void menu_resetmenu_open(void) {
 	const SDL_MessageBoxButtonData buttons[] = {
-		{ SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 1, "Restart" },
-		{ SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 0, "Cancel" },
+		{ SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, 0, "取消" },
+		{ SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, 1, "重启" },
 	};
 	const SDL_MessageBoxData messagebox_data = {
 		.flags = SDL_MESSAGEBOX_INFORMATION,
 		.window = gfx_window,
-		.title = "Confirm",
-		.message = "Restart the game?",
+		.title = "确认",
+		.message = "确定重启游戏吗？",
 		.numbuttons = SDL_arraysize(buttons),
 		.buttons = buttons,
 	};

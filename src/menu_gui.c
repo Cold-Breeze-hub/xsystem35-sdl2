@@ -57,7 +57,7 @@ create_window1 (void)
 
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   g_object_set_data(G_OBJECT(window1), "window1", window1);
-  gtk_window_set_title (GTK_WINDOW (window1), _("InputNumber"));
+  gtk_window_set_title (GTK_WINDOW (window1), _("输入数字"));
   gtk_window_set_resizable(GTK_WINDOW (window1), false);
   gtk_window_set_position(GTK_WINDOW (window1), GTK_WIN_POS_MOUSE);
 
@@ -94,7 +94,7 @@ create_window1 (void)
   gtk_grid_set_row_spacing(GTK_GRID(grid1), 5);
   gtk_grid_set_column_spacing(GTK_GRID(grid1), 3);
 
-  label3 = gtk_label_new (_("default"));
+  label3 = gtk_label_new (_("默认"));
   g_object_ref(label3);
   g_object_set_data_full(G_OBJECT(window1), "label3", label3,
                             (GDestroyNotify)g_object_unref);
@@ -102,7 +102,7 @@ create_window1 (void)
   gtk_grid_attach(GTK_GRID(grid1), label3, 0, 0, 1, 1);
   gtk_label_set_justify (GTK_LABEL (label3), GTK_JUSTIFY_LEFT);
 
-  label9 = gtk_label_new (_("min"));
+  label9 = gtk_label_new (_("最小"));
   g_object_ref(label9);
   g_object_set_data_full(G_OBJECT(window1), "label9", label9,
                             (GDestroyNotify)g_object_unref);
@@ -110,7 +110,7 @@ create_window1 (void)
   gtk_grid_attach(GTK_GRID(grid1), label9, 0, 1, 1, 1);
   gtk_label_set_justify (GTK_LABEL (label9), GTK_JUSTIFY_LEFT);
 
-  label10 = gtk_label_new (_("max"));
+  label10 = gtk_label_new (_("最大"));
   g_object_ref(label10);
   g_object_set_data_full(G_OBJECT(window1), "label10", label10,
                             (GDestroyNotify)g_object_unref);
@@ -150,14 +150,14 @@ create_window1 (void)
   gtk_widget_show (vbox2);
   gtk_box_pack_start (GTK_BOX (hbox1), vbox2, false, true, 0);
   gtk_container_set_border_width (GTK_CONTAINER (vbox2), 10);
-  button1 = gtk_button_new_with_label (_("OK"));
+  button1 = gtk_button_new_with_label (_("确定"));
   g_object_ref(button1);
   g_object_set_data_full(G_OBJECT(window1), "button1", button1,
                             (GDestroyNotify)g_object_unref);
   gtk_widget_show (button1);
   gtk_box_pack_start (GTK_BOX (vbox2), button1, false, false, 0);
 
-  button2 = gtk_button_new_with_label (_("Cancel"));
+  button2 = gtk_button_new_with_label (_("取消"));
   g_object_ref(button2);
   g_object_set_data_full(G_OBJECT(window1), "button2", button2,
                             (GDestroyNotify)g_object_unref);
@@ -200,7 +200,7 @@ create_window2 (void)
   window2 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   g_object_set_data(G_OBJECT(window2), "window2", window2);
   gtk_container_set_border_width (GTK_CONTAINER (window2), 10);
-  gtk_window_set_title (GTK_WINDOW (window2), _("InputString"));
+  gtk_window_set_title (GTK_WINDOW (window2), _("输入字符串"));
   gtk_window_set_resizable(GTK_WINDOW (window2), false);
   gtk_window_set_position(GTK_WINDOW (window2), GTK_WIN_POS_MOUSE);
 
@@ -212,7 +212,7 @@ create_window2 (void)
   gtk_widget_show (vbox3);
   gtk_container_add (GTK_CONTAINER (window2), vbox3);
 
-  menu_label_inputstring_title = label5 = gtk_label_new (_("title"));
+  menu_label_inputstring_title = label5 = gtk_label_new (_("标题"));
   g_object_ref(label5);
   g_object_set_data_full(G_OBJECT(window2), "label5", label5,
                             (GDestroyNotify)g_object_unref);
@@ -228,7 +228,7 @@ create_window2 (void)
   gtk_widget_show (entry1);
   gtk_box_pack_start (GTK_BOX (vbox3), entry1, false, false, 0);
 
-  menu_label_inputstring_maxchar = label6 = gtk_label_new (_("MAX charater"));
+  menu_label_inputstring_maxchar = label6 = gtk_label_new (_("最大字符数"));
   g_object_ref(label6);
   g_object_set_data_full(G_OBJECT(window2), "label6", label6,
                             (GDestroyNotify)g_object_unref);
@@ -237,7 +237,7 @@ create_window2 (void)
   gtk_label_set_justify (GTK_LABEL (label6), GTK_JUSTIFY_LEFT);
   gtk_label_set_xalign(GTK_LABEL(label6), 0.00);
 
-  label7 = gtk_label_new (_("Notice) HANKAKU is not available"));
+  label7 = gtk_label_new (_("注意：不支持半角字符"));
   g_object_ref(label7);
   g_object_set_data_full(G_OBJECT(window2), "label7", label7,
                             (GDestroyNotify)g_object_unref);
@@ -253,14 +253,14 @@ create_window2 (void)
   gtk_widget_show (hbox2);
   gtk_box_pack_start (GTK_BOX (vbox3), hbox2, true, true, 0);
 
-  button4 = gtk_button_new_with_label (_("Cancel"));
+  button4 = gtk_button_new_with_label (_("取消"));
   g_object_ref(button4);
   g_object_set_data_full(G_OBJECT(window2), "button4", button4,
                             (GDestroyNotify)g_object_unref);
   gtk_widget_show (button4);
   gtk_box_pack_end (GTK_BOX (hbox2), button4, false, false, 0);
 
-  button3 = gtk_button_new_with_label (_("OK"));
+  button3 = gtk_button_new_with_label (_("确定"));
   g_object_ref(button3);
   g_object_set_data_full(G_OBJECT(window2), "button3", button3,
                             (GDestroyNotify)g_object_unref);
@@ -293,7 +293,7 @@ create_window3 (void)
   window3 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   g_object_set_data(G_OBJECT(window3), "window3", window3);
   gtk_container_set_border_width (GTK_CONTAINER (window3), 10);
-  gtk_window_set_title (GTK_WINDOW (window3), _("Exit"));
+  gtk_window_set_title (GTK_WINDOW (window3), _("退出"));
   gtk_window_set_resizable(GTK_WINDOW (window3), false);
   gtk_window_set_position(GTK_WINDOW (window3), GTK_WIN_POS_MOUSE);
 
@@ -305,7 +305,7 @@ create_window3 (void)
   gtk_widget_show (vbox4);
   gtk_container_add (GTK_CONTAINER (window3), vbox4);
   gtk_container_set_border_width (GTK_CONTAINER (vbox4), 5);
-  label8 = gtk_label_new (_("Exit System35 ?"));
+  label8 = gtk_label_new (_("确定退出 System35 吗？"));
   g_object_ref(label8);
   g_object_set_data_full(G_OBJECT(window3), "label8", label8,
                             (GDestroyNotify)g_object_unref);
@@ -320,19 +320,19 @@ create_window3 (void)
   gtk_widget_show (hbox3);
   gtk_box_pack_start (GTK_BOX (vbox4), hbox3, true, true, 0);
 
-  button5 = gtk_button_new_with_label (_("Yes"));
-  g_object_ref(button5);
-  g_object_set_data_full(G_OBJECT(window3), "button5", button5,
-                            (GDestroyNotify)g_object_unref);
-  gtk_widget_show (button5);
-  gtk_box_pack_start (GTK_BOX (hbox3), button5, false, true, 0);
-
-  button6 = gtk_button_new_with_label (_("No"));
+  button6 = gtk_button_new_with_label (_("取消"));
   g_object_ref(button6);
   g_object_set_data_full(G_OBJECT(window3), "button6", button6,
                             (GDestroyNotify)g_object_unref);
   gtk_widget_show (button6);
   gtk_box_pack_start (GTK_BOX (hbox3), button6, false, true, 0);
+
+  button5 = gtk_button_new_with_label (_("退出"));
+  g_object_ref(button5);
+  g_object_set_data_full(G_OBJECT(window3), "button5", button5,
+                            (GDestroyNotify)g_object_unref);
+  gtk_widget_show (button5);
+  gtk_box_pack_start (GTK_BOX (hbox3), button5, false, true, 0);
 
   g_signal_connect(window3, "destroy",
                       G_CALLBACK(on_window3_destroy),
@@ -363,7 +363,7 @@ create_window4 (void)
 
   window4 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   g_object_set_data(G_OBJECT(window4), "window4", window4);
-  gtk_window_set_title (GTK_WINDOW (window4), _("About"));
+  gtk_window_set_title (GTK_WINDOW (window4), _("关于"));
   gtk_window_set_position(GTK_WINDOW (window4), GTK_WIN_POS_MOUSE);
 
   fixed1 = gtk_fixed_new ();
@@ -381,14 +381,14 @@ create_window4 (void)
   gtk_fixed_put (GTK_FIXED (fixed1), notebook1, 0, 0);
   gtk_widget_set_size_request(notebook1, 248, 104);
 
-  label26 = gtk_label_new ("System 3.5 scenario decoder\nfor X\nVersion "VERSION" [proj. RainyMoon]");
+  label26 = gtk_label_new ("System 3.5 脚本解码器\nfor X\n版本 "VERSION" [proj. RainyMoon]");
   g_object_ref(label26);
   g_object_set_data_full(G_OBJECT(window4), "label26", label26,
                             (GDestroyNotify)g_object_unref);
   gtk_widget_show (label26);
   gtk_container_add (GTK_CONTAINER (notebook1), label26);
 
-  label23 = gtk_label_new (_("Information1"));
+  label23 = gtk_label_new (_("信息1"));
   g_object_ref(label23);
   g_object_set_data_full(G_OBJECT(window4), "label23", label23,
                             (GDestroyNotify)g_object_unref);
@@ -398,7 +398,7 @@ create_window4 (void)
   gtk_widget_show (empty_notebook_page);
   gtk_container_add (GTK_CONTAINER (notebook1), empty_notebook_page);
 
-  label24 = gtk_label_new (_("Information2"));
+  label24 = gtk_label_new (_("信息2"));
   g_object_ref(label24);
   g_object_set_data_full(G_OBJECT(window4), "label24", label24,
                             (GDestroyNotify)g_object_unref);
@@ -408,13 +408,13 @@ create_window4 (void)
   gtk_widget_show (empty_notebook_page);
   gtk_container_add (GTK_CONTAINER (notebook1), empty_notebook_page);
 
-  label25 = gtk_label_new (_("Information3"));
+  label25 = gtk_label_new (_("信息3"));
   g_object_ref(label25);
   g_object_set_data_full(G_OBJECT(window4), "label25", label25,
                             (GDestroyNotify)g_object_unref);
   gtk_widget_show (label25);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 2), label25);
-  button11 = gtk_button_new_with_label (_("OK"));
+  button11 = gtk_button_new_with_label (_("确定"));
   g_object_ref(button11);
   g_object_set_data_full(G_OBJECT(window4), "button11", button11,
                             (GDestroyNotify)g_object_unref);
@@ -451,7 +451,7 @@ create_menu1 (void)
 
   menu1 = gtk_menu_new ();
   g_object_set_data(G_OBJECT(menu1), "menu1", menu1);
-  item1 = gtk_menu_item_new_with_label (_("MessageSkip"));
+  item1 = gtk_menu_item_new_with_label (_("消息快进"));
   g_object_ref(item1);
   g_object_set_data_full(G_OBJECT(menu1), "item1", item1,
                             (GDestroyNotify)g_object_unref);
@@ -463,7 +463,7 @@ create_menu1 (void)
   g_object_set_data_full(G_OBJECT(menu1), "item1_menu", item1_menu,
                             (GDestroyNotify)g_object_unref);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (item1), item1_menu);
-  menu_item_msgskip_on = item2 = gtk_radio_menu_item_new_with_label (msg_group, _("ON"));
+  menu_item_msgskip_on = item2 = gtk_radio_menu_item_new_with_label (msg_group, _("开启"));
   msg_group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM (item2));
   g_object_ref(item2);
   g_object_set_data_full(G_OBJECT(menu1), "item2", item2,
@@ -471,7 +471,7 @@ create_menu1 (void)
   gtk_widget_show (item2);
   gtk_container_add (GTK_CONTAINER (item1_menu), item2);
 
-  menu_item_msgskip_off = item3 = gtk_radio_menu_item_new_with_label (msg_group, _("OFF"));
+  menu_item_msgskip_off = item3 = gtk_radio_menu_item_new_with_label (msg_group, _("关闭"));
   msg_group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM (item3));
   g_object_ref(item3);
   g_object_set_data_full(G_OBJECT(menu1), "item3", item3,
@@ -487,7 +487,7 @@ create_menu1 (void)
   gtk_container_add (GTK_CONTAINER (menu1), __________1);
   gtk_widget_set_sensitive (__________1, false);
 
-  item4 = gtk_menu_item_new_with_label (_("MouseAutoMove"));
+  item4 = gtk_menu_item_new_with_label (_("鼠标自动移动"));
   g_object_ref(item4);
   g_object_set_data_full(G_OBJECT(menu1), "item4", item4,
                             (GDestroyNotify)g_object_unref);
@@ -499,7 +499,7 @@ create_menu1 (void)
   g_object_set_data_full(G_OBJECT(menu1), "item4_menu", item4_menu,
                             (GDestroyNotify)g_object_unref);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (item4), item4_menu);
-  item5 = gtk_radio_menu_item_new_with_label (mouse_group, _("ON"));
+  item5 = gtk_radio_menu_item_new_with_label (mouse_group, _("开启"));
   mouse_group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM (item5));
   g_object_ref(item5);
   g_object_set_data_full(G_OBJECT(menu1), "item5", item5,
@@ -507,7 +507,7 @@ create_menu1 (void)
   gtk_widget_show (item5);
   gtk_container_add (GTK_CONTAINER (item4_menu), item5);
 
-  item6 = gtk_radio_menu_item_new_with_label (mouse_group, _("OFF"));
+  item6 = gtk_radio_menu_item_new_with_label (mouse_group, _("关闭"));
   mouse_group = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM (item6));
   g_object_ref(item6);
   g_object_set_data_full(G_OBJECT(menu1), "item6", item6,
@@ -523,14 +523,14 @@ create_menu1 (void)
   gtk_container_add (GTK_CONTAINER (menu1), __________2);
   gtk_widget_set_sensitive (__________2, false);
 
-  item7 = gtk_menu_item_new_with_label (_("VolumeValance"));
+  item7 = gtk_menu_item_new_with_label (_("音量平衡"));
   g_object_ref(item7);
   g_object_set_data_full(G_OBJECT(menu1), "item7", item7,
                             (GDestroyNotify)g_object_unref);
   gtk_widget_show (item7);
   gtk_container_add (GTK_CONTAINER (menu1), item7);
 
-  item16 = gtk_menu_item_new_with_label (_("About"));
+  item16 = gtk_menu_item_new_with_label (_("关于"));
   g_object_ref(item16);
   g_object_set_data_full(G_OBJECT(menu1), "item16", item16,
                             (GDestroyNotify)g_object_unref);
@@ -545,7 +545,7 @@ create_menu1 (void)
   gtk_container_add (GTK_CONTAINER (menu1), __________4);
   gtk_widget_set_sensitive (__________4, false);
 
-  item17 = gtk_menu_item_new_with_label (_("Exit"));
+  item17 = gtk_menu_item_new_with_label (_("退出"));
   g_object_ref(item17);
   g_object_set_data_full(G_OBJECT(menu1), "item17", item17,
                             (GDestroyNotify)g_object_unref);

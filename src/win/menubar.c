@@ -82,9 +82,7 @@ void win_menu_init(void) {
 	hmenu = LoadMenu(hinst, MAKEINTRESOURCE(IDR_MENU1));
 	SetMenu(get_hwnd(gfx_window), hmenu);
 	SDL_EventState(SDL_SYSWMEVENT, SDL_ENABLE);
-	// Let SDL recalc the window size, taking menu height into account.
 	SDL_SetWindowSize(gfx_window, view_w, view_h);
-	CheckMenuItem(hmenu, ID_OPTION_MOUSE_MOVE, MF_BYCOMMAND | MFS_CHECKED);
 }
 
 void win_menu_onSysWMEvent(SDL_SysWMmsg* msg) {
@@ -150,7 +148,7 @@ void menu_setSkipState(bool enabled, bool activated) {
 	if (GetMenuItemInfoW(hmenu, ID_MSGSKIP, false, &menuitem)) {
 		wchar_t *p = wcsrchr(buf, L'[');
 		if (p) {
-			wcscpy(p, activated ? L"[on]" : L"[off]");
+			wcscpy(p, activated ? L"[开启]" : L"[关闭]");
 			SetMenuItemInfoW(hmenu, ID_MSGSKIP, false, &menuitem);
 		}
 	}

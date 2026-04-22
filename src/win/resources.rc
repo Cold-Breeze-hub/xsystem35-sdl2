@@ -118,3 +118,56 @@ FONT 9, "ＭＳ Ｐゴシック"
     DEFPUSHBUTTON   "OK",IDOK,18,36,40,14
     PUSHBUTTON      "キャンセル",IDCANCEL,63,36,40,14
 }
+
+////////////////////////////////////////////////////////////////////////
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+
+IDR_MENU1 MENU DISCARDABLE
+{
+    POPUP "文件"
+    {
+        MENUITEM "保存截图",                      ID_SCREENSHOT
+        MENUITEM "重新启动",                      ID_RESTART
+        MENUITEM "退出",                          ID_EXIT
+    }
+    POPUP "屏幕"
+    {
+        MENUITEM "窗口模式",                      ID_SCREEN_WINDOW
+        MENUITEM "全屏模式",                      ID_SCREEN_FULL
+        MENUITEM "整数倍缩放",                    ID_SCREEN_INTEGER_SCALING
+    }
+    POPUP "选项"
+    {
+        MENUITEM "鼠标移动",                      ID_OPTION_MOUSE_MOVE
+        MENUITEM "自动复制文本到剪贴板",          ID_OPTION_AUTO_COPY
+    }
+    MENUITEM "消息快进[关]",                     ID_MSGSKIP
+}
+
+STRINGTABLE
+{
+	IDS_CHOOSE_GAME_FOLDER "请选择游戏文件夹:"
+}
+
+IDD_TEXTINPUT DIALOG DISCARDABLE  0, 0, 122, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "文本输入"
+FONT 9, "微软雅黑"
+{
+    EDITTEXT        IDC_TEXTEDIT,7,15,112,12
+    LTEXT           "请输入字符串（最多8个字符）",IDC_TEXTLABEL,7,3,112,8
+    DEFPUSHBUTTON   "确定",IDOK,18,36,40,14
+    PUSHBUTTON      "取消",IDCANCEL,63,36,40,14
+}
+
+IDD_NUMINPUT DIALOG DISCARDABLE  0, 0, 122, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "数字输入"
+FONT 9, "微软雅黑"
+{
+    EDITTEXT        IDC_NUMEDIT,7,15,98,12, ES_NUMBER
+    CONTROL         "",IDC_NUMSPIN,"msctls_updown32",UDS_ALIGNRIGHT | UDS_SETBUDDYINT | UDS_ARROWKEYS | UDS_NOTHOUSANDS | WS_BORDER | WS_TABSTOP,105,15,14,12
+    LTEXT           "请输入数字",IDC_NUMLABEL,7,3,112,8
+    DEFPUSHBUTTON   "确定",IDOK,18,36,40,14
+    PUSHBUTTON      "取消",IDCANCEL,63,36,40,14
+}

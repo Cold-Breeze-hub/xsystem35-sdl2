@@ -126,7 +126,7 @@ bool ags_check_param_xy(int *x, int *y) {
 }
 
 void ags_init(const char *render_driver, bool enable_zb) {
-	nact->ags.mouse_warp_enabled = true;
+	nact->ags.mouse_warp_enabled = false;
 	nact->ags.world_width  =  SYS35_DEFAULT_WIDTH;
 	nact->ags.world_height =  SYS35_DEFAULT_HEIGHT;
 	nact->ags.world_depth =  SYS35_DEFAULT_DEPTH;
@@ -157,7 +157,7 @@ void ags_remove(void) {
 }
 
 void ags_reset(void) {
-	nact->ags.mouse_warp_enabled = true;
+	nact->ags.mouse_warp_enabled = false;
 	nact->ags.eventcb = NULL;
 	initPal();
 	cg_reset();
