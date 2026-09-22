@@ -106,6 +106,12 @@ void commandIK() {
 	case 6:
 		sysVar[0] = sys_getInputInfo();
 		break;
+	case 7:
+		sys_setWheelDetection(true);
+		break;
+	case 8:
+		sys_setWheelDetection(false);
+		break;
 	default:
 		WARNING("commandIK(): Unknown Command %d", num);
 	}
@@ -116,8 +122,23 @@ void commandIM() {
 	int *x_var = getCaliVariable();
 	int *y_var = getCaliVariable();
 	SDL_Point p;
-	
-	sysVar[0] = sys_getMouseInfo(&p, false);
+	// Tab键状态追踪：等释放再生效，避免长按时重复触发
+	static bool tab_prev = false;
+	static bool tab_release_flag = false;
+
+	sysVar[0] = sys_getMouseInfo(&p, false);  // 内部会调用 get_event() 更新 RawKeyInfo
+
+	// Tab键边沿检测：检测到释放事件时设置标志，下次读取时返回一次
+	bool tab_now = RawKeyInfo[KEY_TAB];
+	if (tab_prev && !tab_now) {
+		tab_release_flag = true;
+	}
+	tab_prev = tab_now;
+
+	if (tab_release_flag) {
+		sysVar[0] |= SYS35KEY_TAB;
+		tab_release_flag = false;  // 读取后清除，每次按下释放仅报告一次
+	}
 	*x_var = p.x;
 	*y_var = p.y;
 	TRACE("IM %d,%d:", *x_var, *y_var);

@@ -33,8 +33,21 @@
 #include "msgskip.h"
 
 static int hak_ignore_mask      = 0xffffffff;
+// 按键释放等待掩码：置位的按键在 sys_key_releasewait/sys_hit_any_key 中会等待释放
+// bit4 (SYS35KEY_RET) : 回车键 / 鼠标左键（左键映射为 RET）
+// bit7 (SYS35KEY_TAB) : Tab键 —— 加入此位使 Tab 在 IK0 中与左键一样等待释放，避免长按重复读入
 static int hak_releasewait_mask = (0 << 0) | (0 << 1) | (0 << 2) | (0 << 3) |
-                                  (1 << 4) | (0 << 5) | (0 << 6) | (0 << 7) ;
+                                  (1 << 4) | (0 << 5) | (0 << 6) | (1 << 7) ;
+static bool wheel_detection_enabled = false;
+
+void sys_setWheelDetection(bool enable) {
+	wheel_detection_enabled = enable;
+}
+
+bool sys_toggleWheelDetection(void) {
+	wheel_detection_enabled = !wheel_detection_enabled;
+	return wheel_detection_enabled;
+}
 
 void set_hak_keymode(int key, int mode) {
 	int flg = (1 << key);
@@ -109,6 +122,19 @@ int sys_keywait(int msec, unsigned flags) {
 		else
 			sys_wait_vsync();
 		nact->callback();
+		
+		if (wheel_detection_enabled) {
+			int forward, back;
+			sys_getWheelInfo(&forward, &back);
+			if (forward > 0) {
+				sys_clearWheelInfo();
+				return SYS35KEY_UP;
+			} else if (back > 0) {
+				sys_clearWheelInfo();
+				return SYS35KEY_DOWN;
+			}
+		}
+		
 		key = sys_getInputInfo();
 		cancel_yield();  // We just yielded!
 		if ((flags & KEYWAIT_CANCELABLE) && key) break;

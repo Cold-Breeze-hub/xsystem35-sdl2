@@ -45,7 +45,9 @@
 /* 選択肢の最大数 */
 #define ELEMENT_MAX 20
 /* 選択肢の１つの最大長さ */
-#define ELEMENT_LENGTH 101
+// 原 101 字节：han2zen 会把半角空格转全角（2~3字节/个），配合 R 指令选项内换行时
+// 很容易超长导致尾部被静默截断（表现为选项右半边文字不显示），扩大到 512
+#define ELEMENT_LENGTH 512
 
 /**************** Private Variables **********************/
 /* 選択肢の要素 */
@@ -80,6 +82,51 @@ static int keymode = 0;
 static void drawLineFrame(int x, int y, int width, int height);
 static int  whereElement(void);
 
+/* 选项内换行（R 指令）支持辅助函数 */
+
+// 统计选项文本所跨的行数（含末尾无换行符的最后一行）
+static int sel_countLines(const char *s) {
+	int lines = 1;
+	for (const char *p = s; *p; p++) {
+		if (*p == '\n') lines++;
+	}
+	return lines;
+}
+
+// 返回该选项中最长一行以 SJIS 双字节字符计的等效宽度（向上取整）
+static int sel_maxLineLenSJIS(const char *s) {
+	int maxLen = 0, len = 0;
+	for (const char *p = s; *p; p++) {
+		if (*p == '\n') {
+			if (len > maxLen) maxLen = len;
+			len = 0;
+		} else {
+			len++;
+		}
+	}
+	if (len > maxLen) maxLen = len;
+	return (maxLen + 1) / 2;
+}
+
+// 绘制可能含 '\n' 的选项文本，按行从 (x, y) 起逐行下移
+static void sel_drawElementText(int x, int y, const char *text, int color) {
+	char buf[ELEMENT_LENGTH];
+	int line = 0;
+	const char *p = text;
+	while (*p) {
+		const char *nl = strchr(p, '\n');
+		size_t n = nl ? (size_t)(nl - p) : strlen(p);
+		if (n >= sizeof(buf)) n = sizeof(buf) - 1;
+		memcpy(buf, p, n);
+		buf[n] = '\0';
+		if (buf[0])
+			ags_drawString(x, y + line * (sel.MsgFontSize + sel.ElementSpacing), buf, color, NULL);
+		line++;
+		if (!nl) break;
+		p = nl + 1;
+	}
+}
+
 /*
   各公開変数初期化
 */
@@ -102,7 +149,10 @@ void sel_init() {
 	sel.SelectedElementColor     = 0;
 	sel.WinBackgroundTransparent = 255;
 	sel.EncloseType              = 0;
-	
+
+	/* 選択肢間の行間隔（デフォルト 2px、ZC 16 で変更可能） */
+	sel.ElementSpacing           = 2;
+
 	/* 選択したあとメッセージ領域を初期化するか */
 	sel.ClearMsgWindow  = true;
 	
@@ -245,8 +295,12 @@ void sel_setFontSize(int size) {
 /* 選択肢の登録 */
 void sel_addElement(const char *str) {
 	int catlen;
-	
+
 	catlen = ELEMENT_LENGTH - strlen(elm[regnum]) -1;
+	if ((int)strlen(str) > catlen) {
+		// 追加后超出缓冲，尾部将被截断——输出警告便于定位选项文字显示不全的问题
+		WARNING("selection element %d truncated: need %d bytes, only %d left", regnum, (int)strlen(str), catlen);
+	}
 	strncat(elm[regnum], str, catlen);
 }
 
@@ -258,7 +312,8 @@ void sel_addRetValue(int val) {
 
 /* １要素の登録の終了 */
 void sel_fixElement() {
-	maxElementLength = max(maxElementLength, strlen(elm[regnum]) /2);
+	// 按最长一行估算宽度，支持 R 指令插入的选项内换行
+	maxElementLength = max(maxElementLength, sel_maxLineLenSJIS(elm[regnum]));
 	regnum++;
 }
 
@@ -266,12 +321,18 @@ void sel_fixElement() {
 static void init_selwindow() {
 	int i;
 	SDL_Rect r;
-	
+
+	// 统计每个选项的行数及所有选项的总行数，用于支持 R 指令插入的选项内换行
+	int totalLines = 0;
+	for (i = 0; i < regnum; i++) {
+		totalLines += sel_countLines(elm[i]);
+	}
+
 	r.x = sel.win->x;
 	r.y = sel.win->y;
 	r.w = 4 + (sel.WinResizeWidth  ? sel.MsgFontSize * maxElementLength : sel.win->width);
-	r.h = 2 + (sel.WinResizeHeight ? (sel.MsgFontSize +2) * regnum     : max((sel.MsgFontSize +2) * regnum, sel.win->height));
-	
+	r.h = 2 + (sel.WinResizeHeight ? (sel.MsgFontSize + sel.ElementSpacing) * totalLines : max((sel.MsgFontSize + sel.ElementSpacing) * totalLines, sel.win->height));
+
 	if (sel.win->save) {
 		saveArea.x = r.x - sel.Framedot;
 		saveArea.y = r.y - sel.Framedot;
@@ -281,13 +342,13 @@ static void init_selwindow() {
 	} else {
 		saveArea = r;
 	}
-	
+
 	if (sel.WinBackgroundTransparent == 255) {
 		ags_fillRectangle(r.x, r.y, r.w, r.h, sel.WinBackgroundColor);
 	} else {
 		ags_wrapColor(r.x, r.y, r.w, r.h, sel.WinBackgroundColor, sel.WinBackgroundTransparent);
 	}
-	
+
 	switch(sel.WindowFrameType) {
 	case WINDOW_FRAME_EMPTY:
 		break;
@@ -302,32 +363,35 @@ static void init_selwindow() {
 		break;
 	}
 	ags_setFontWithWeight(nact->ags.font_type, sel.MsgFontSize, nact->ags.font_weight);
+	int yPos = r.y + 1;
 	for (i = 0; i < regnum; i++) {
 		TRACE_MESSAGE("%d:%s\n", i +1, elm[i]);
-		ags_drawString(r.x +2, r.y + i * (sel.MsgFontSize +2) +1, elm[i], sel.MsgFontColor, NULL);
+		// 支持选项内含 '\n' 的多行绘制，从 yPos 起逐行下移
+		sel_drawElementText(r.x + 2, yPos, elm[i], sel.MsgFontColor);
+		yPos += sel_countLines(elm[i]) * (sel.MsgFontSize + sel.ElementSpacing);
 	}
 	ags_updateArea(saveArea.x, saveArea.y, saveArea.w, saveArea.h);
-	
+
 	/* マウスカーソルの自動移動 */
 	int x = r.x + r.w * MOUSE_INIT_X_RATIO/100;
 	if (default_element == 0) {
 		SDL_Point p;
 		sys_getMouseInfo(&p, true);
 		if (p.y < r.y) {
-			int y = r.y + (sel.MsgFontSize +2) * MOUSE_INIT_Y_RATIO/100;
+			int y = r.y + (sel.MsgFontSize + sel.ElementSpacing) * MOUSE_INIT_Y_RATIO/100;
 			ags_setCursorLocation(x, y, true, true);
 		} else if (p.y > (r.y + r.h)) {
-			int y = r.y + (sel.MsgFontSize +2) * regnum * MOUSE_INIT_Y_RATIO/100;
+			int y = r.y + (sel.MsgFontSize + sel.ElementSpacing) * totalLines * MOUSE_INIT_Y_RATIO/100;
 			ags_setCursorLocation(x, y, true, true);
 		} else {
 			int y = p.y * MOUSE_INIT_Y_RATIO/100;
 			ags_setCursorLocation(x, y, true, true);
 		}
 	} else if (default_element < regnum) {
-		int y = r.y + (sel.MsgFontSize +2) * default_element * MOUSE_INIT_Y_RATIO/100;
+		int y = r.y + (sel.MsgFontSize + sel.ElementSpacing) * default_element * MOUSE_INIT_Y_RATIO/100;
 		ags_setCursorLocation(x, y, true, true);
 	} else if (default_element < 1000) {
-		int y = r.y + (sel.MsgFontSize +2) * regnum * MOUSE_INIT_Y_RATIO/100;
+		int y = r.y + (sel.MsgFontSize + sel.ElementSpacing) * totalLines * MOUSE_INIT_Y_RATIO/100;
 		ags_setCursorLocation(x, y, true, true);
 	}
 }
@@ -390,7 +454,8 @@ static void encloseElement(int sw, int no) {
 				lineEncloseElement(r, sel.WinBackgroundColor, false); break;
 			case 2:
 				ags_fillRectangle(r->x, r->y, r->w +2, r->h +2, sel.WinBackgroundColor);
-				ags_drawString(r->x +2, r->y +1, elm[no], sel.MsgFontColor, NULL);
+				// 支持选项内含 '\n' 的多行重绘
+				sel_drawElementText(r->x +2, r->y +1, elm[no], sel.MsgFontColor);
 				ags_updateArea(r->x, r->y, r->w +2, r->h +2);
 				break;
 			default:
@@ -409,7 +474,8 @@ static void encloseElement(int sw, int no) {
 			lineEncloseElement(r, 255, false); break;
 		case 2:
 			ags_fillRectangle(r->x, r->y, r->w +2, r->h +2, sel.MsgFontColor);
-			ags_drawString(r->x +2, r->y +1, elm[no], sel.WinBackgroundColor, NULL);
+			// 支持选项内含 '\n' 的多行重绘
+			sel_drawElementText(r->x +2, r->y +1, elm[no], sel.WinBackgroundColor);
 			ags_updateArea(r->x, r->y, r->w +2, r->h +2);
 			break;
 		default:
@@ -449,11 +515,15 @@ void sel_select() {
 		NOMEMERR();
 	}
 
+	// 各选项の行数に応じてマウス当たり判定の Y 座標・高さを設定（R 指令の選択肢内改行に対応）
+	int yCur = sel.win->y;
 	for (i = 0; i < regnum; i++) {
+		int lines = sel_countLines(elm[i]);
 		workR[i].x = sel.win->x;
-		workR[i].y = sel.win->y + i * (sel.MsgFontSize +2);
+		workR[i].y = yCur;
 		workR[i].w = 2 + (sel.WinResizeWidth ? sel.MsgFontSize * maxElementLength : sel.win->width);
-		workR[i].h = 2 + sel.MsgFontSize;
+		workR[i].h = 2 + lines * sel.MsgFontSize + (lines - 1) * sel.ElementSpacing;
+		yCur += lines * (sel.MsgFontSize + sel.ElementSpacing);
 	}
 	
 	sys_key_releasewait(SYS35KEY_RET, false);

@@ -167,6 +167,8 @@ extern int sys_getKeyInfo(void);
 extern int sys_getJoyInfo(void);
 extern void sys_getWheelInfo(int *forward, int *back);
 extern void sys_clearWheelInfo(void);
+extern void sys_setWheelDetection(bool enable);
+extern bool sys_toggleWheelDetection(void);
 extern void sys_key_releasewait(int key, bool zi_mask_enabled);
 extern void sys_hit_any_key();
 extern void set_hak_keymode(int key, int mode);

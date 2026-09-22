@@ -953,7 +953,12 @@ void exec_command(void) {
 	case 'R':
 		/* 改行 */
 		TRACE_MESSAGE("\n");
-		msg_nextLine();
+		if (nact->sel.in_setting) {
+			// 选项注册中：向当前选项缓冲插入换行符，实现选项内换行
+			sel_addElement("\n");
+		} else {
+			msg_nextLine();
+		}
 		break;
 	case 'S':
 		switch(sl_getc()) {

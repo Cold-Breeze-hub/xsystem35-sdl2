@@ -118,6 +118,9 @@ void msg_putMessage(const char *m) {
 	/* 表示文字列を文字列変数にコピーする */
 	if (msg.mg_getString) {
 		copyMsgToStrVar(m);
+		if (msg.mg_policyR != 0) {
+			msg.mg_curStrVarNo++;
+		}
 	}
 	
 	// fprintf(stdout, "x=%d, y = %d, msg=%s\n", msgcur.x,msgcur.y,msg);
@@ -145,6 +148,12 @@ void msg_putMessage(const char *m) {
 	} else {
 		ags_updateArea(drawn.x, drawn.y, drawn.w, drawn.h);
 		//如果快进或点击取消逐字显示则直接显示全部对话，跳过逐字显示;
+		//Ctrl加速（msgskip）时为每条消息添加少量延迟，避免过快;此处可对加速速度进行调整
+		//仅当逐字显示开启（ZW 2）时才添加延迟；ZW 1关闭逐字显示后，Ctrl跳过应立即生效，否则延迟会让分段文本看起来像逐字显示
+		if (msgskip_isSkipping() && nact->messagewait_enable) {
+			sys_sleep(50);
+			nact->callback();
+		}
 	}
 }
 

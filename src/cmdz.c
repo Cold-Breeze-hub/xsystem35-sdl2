@@ -72,6 +72,7 @@ void commandZC() {
 	case 13: nact->msg.WinBackgroundTransparent = n; break;
 	case 14: nact->sel.WinBackgroundTransparent = n; break;
 	case 15: sel_setDefaultElement(n); break;
+	case 16: nact->sel.ElementSpacing = n; break;  /* 選択肢間の行間隔（ピクセル） */
 	default:
 		WARNING("commandZC(): Unknown Command (%d)", m); break;
 	}
@@ -237,7 +238,7 @@ void commandZT0() {
 	*(var + 4) =        lc->tm_min;
 	*(var + 5) =        lc->tm_sec;
 	*(var + 6) = 1    + lc->tm_wday;
-	
+
 	TRACE("ZT0 %p:", var);
 }
 

@@ -65,6 +65,9 @@ struct _selection {
 	int WinBackgroundTransparent;
 	int EncloseType;
 	
+	/* 选项之间的行间距（像素），可在 ZC 16 中进行设置 */
+	int ElementSpacing;
+
 	/* 選択したあとメッセージ領域を初期化するか */
 	bool ClearMsgWindow;
 	

@@ -622,6 +622,7 @@ int event_get_mouse(SDL_Point *p) {
 }
 
 void event_get_wheel(int *forward, int *back) {
+	get_event();
 	*forward = mouse_wheel_up;
 	*back = mouse_wheel_down;
 
