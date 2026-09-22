@@ -6,6 +6,8 @@
 
 请参阅[游戏兼容性列表](https://game_compatibility.md/)，了解可以使用 xsystem35-sdl2 运行的游戏列表。
 
+注意：此项目为适配鬼畜王兰斯的汉化做了专门的修改，与原项目有所区别，也不能保证运行除鬼畜王兰斯中文汉化版以外的游戏，如果想要运行其他的在游戏兼容性表中的游戏，请前往[原项目](https://github.com/kichikuou/xsystem35-sdl2)。
+
 ## 独特功能
 
 除了原始 System 3.x 的功能之外，xsystem35-sdl2 还提供了以下特性：
